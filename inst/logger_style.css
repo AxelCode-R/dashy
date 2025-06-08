@@ -1,0 +1,79 @@
+#logger_container {
+  line-height: 1;
+  max-height: 88vh;
+  overflow-y: clip;
+  padding-bottom: 5px;
+}
+
+.logger_element {
+  border-left: 3px solid gray;
+  border-top: 1px solid gray;
+  padding: 3px;
+  margin-bottom: 10px;
+  box-shadow: 2px 3px 6px #888888;
+  border-radius: 6px;
+}
+
+.logger_element_text {
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logger_element_text_ellapsed {
+  -webkit-line-clamp: unset;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.logger_element_title {
+  with: 100%;
+  padding-bottom: 2px;
+}
+
+#controlbar .tab-content {
+  padding: 5px 8px;
+}
+
+
+@keyframes animate_icon {
+  0% {
+    transform: rotate(0deg);
+    border-width: 1px;
+    border-color: transparent;
+  }
+  25% {
+    transform: rotate(180deg);
+    border-width: 1px;
+    border-color: yellow;
+  }
+  50% {
+    transform: rotate(360deg);
+    border-width: 1px;
+    border-color: transparent;
+  }
+  75% {
+    transform: rotate(180deg);
+    border-width: 1px;
+    border-color: yellow;
+  }
+  100% {
+    transform: rotate(0deg);
+    border-width: 1px;
+    border-color: transparent;
+  }
+}
+.icon-unanimated {
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: transparent;
+  border-style: solid;
+}
+.icon-animation {
+  animation: animate_icon 3s ease-in-out;
+}
