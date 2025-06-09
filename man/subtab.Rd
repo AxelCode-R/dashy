@@ -2,17 +2,19 @@
 % Please edit documentation in R/app_framework.R
 \name{subtab}
 \alias{subtab}
-\title{Title}
+\title{subtab}
 \usage{
-subtab(..., name, css_files)
+subtab(..., name, startExpanded = FALSE, css_files = NULL)
 }
 \arguments{
-\item{...}{a}
+\item{...}{tabs, see \code{\link{tab}}}
 
-\item{name}{a}
+\item{name}{name to display in left-sidebar for the subtab}
 
-\item{css_files}{a}
+\item{startExpanded}{should it start as expanded?}
+
+\item{css_files}{css file paths}
 }
 \description{
-Title
+subtab
 }

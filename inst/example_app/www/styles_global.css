@@ -1,0 +1,13 @@
+
+.skin-blue .main-header .navbar {
+  background-color: green;
+}
+
+section.content {
+  padding: 0px;
+  margin: 0px;
+}
+
+.wrapper {
+  position: unset;
+}

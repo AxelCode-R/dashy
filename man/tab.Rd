@@ -4,16 +4,20 @@
 \alias{tab}
 \title{tab}
 \usage{
-tab(name, R6class, css_files = NULL, lazy = TRUE)
+tab(name, R6class, selected = NULL, css_files = NULL, lazy = TRUE)
 }
 \arguments{
-\item{name}{a}
+\item{name}{name to display in left-sidebar for the tab}
 
-\item{R6class}{a}
+\item{R6class}{R6 class with ns, app_rv and logger as arguments and
+public ui() and server() functions}
 
-\item{css_files}{a}
+\item{selected}{should the tab be selected on init?}
 
-\item{lazy}{a}
+\item{css_files}{css file paths}
+
+\item{lazy}{should the tabs ui and server only load if a user selects it or
+on start-up?}
 }
 \description{
 tab

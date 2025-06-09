@@ -2,17 +2,29 @@
 % Please edit documentation in R/app_framework.R
 \name{create_app}
 \alias{create_app}
-\title{Title}
+\title{create_app}
 \usage{
-create_app(..., app_title = "", css_files_global = NULL)
+create_app(..., app_title = "", css_files_global = NULL, js_files = NULL)
 }
 \arguments{
-\item{...}{a}
+\item{...}{tabs or subtabs, see \code{\link{tab}} or \code{\link{subtab}}}
 
-\item{app_title}{a}
+\item{app_title}{app title to display}
 
-\item{css_files_global}{a}
+\item{css_files_global}{css file paths}
+
+\item{js_files}{js file paths}
 }
 \description{
-Title
+create_app
+}
+\examples{
+\dontrun{
+  dashy::create_app_example(run = FALSE)
+
+  # or
+  app <- dashy::create_app_example(run = FALSE)
+  shiny::shinyApp(ui = app$ui, server = app$server)
+}
+
 }

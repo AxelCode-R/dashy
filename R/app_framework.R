@@ -1,12 +1,70 @@
-#' Title
+#' subtab
 #'
-#' @param ... a
-#' @param app_title a
-#' @param css_files_global a
+#' @param ... tabs, see \code{\link{tab}}
+#' @param name name to display in left-sidebar for the subtab
+#' @param startExpanded should it start as expanded?
+#' @param css_files css file paths
 #'
 #' @export
 #'
-create_app = function(..., app_title = "", css_files_global = NULL) {
+subtab = function(..., name, startExpanded = FALSE, css_files = NULL) {
+  list(
+    name = name,
+    id = create_tab_name_id(name),
+    startExpanded = startExpanded,
+    subtabs = lapply(
+      X = list(...),
+      FUN = function(l) {
+        if (!is.null(css_files)) {
+          l$css_files <- c(l$css_files, css_files)
+        }
+        return(l)
+      }
+    )
+  )
+}
+
+#' tab
+#'
+#' @param name name to display in left-sidebar for the tab
+#' @param R6class R6 class with ns, app_rv and logger as arguments and
+#'                public ui() and server() functions
+#' @param selected should the tab be selected on init?
+#' @param css_files css file paths
+#' @param lazy should the tabs ui and server only load if a user selects it or
+#'             on start-up?
+#'
+#' @export
+#'
+tab = function(name, R6class, selected = NULL, css_files = NULL, lazy = TRUE) {
+  list(
+    name = name,
+    id = create_tab_name_id(name),
+    R6class = R6class,
+    selected = selected,
+    css_files = css_files,
+    lazy = lazy
+  )
+}
+
+#' create_app
+#'
+#' @param ... tabs or subtabs, see \code{\link{tab}} or \code{\link{subtab}}
+#' @param app_title app title to display
+#' @param css_files_global css file paths
+#' @param js_files js file paths
+#'
+#' @export
+#'
+#' @examples \dontrun{
+#'   dashy::create_app_example(run = FALSE)
+#'
+#'   # or
+#'   app <- dashy::create_app_example(run = FALSE)
+#'   shiny::shinyApp(ui = app$ui, server = app$server)
+#' }
+#'
+create_app = function(..., app_title = "", css_files_global = NULL, js_files = NULL) {
   logger <- AppReactiveLogger$new()
 
   tabs <- list(...)
@@ -77,6 +135,11 @@ create_app = function(..., app_title = "", css_files_global = NULL) {
       if (!is.null(css_files_global)) {
         shiny::tags$style(shiny::HTML({
           unlist(lapply(css_files_global, readLines))
+        }))
+      },
+      if (!is.null(js_files)) {
+        shiny::tags$script(shiny::HTML({
+          unlist(lapply(js_files, readLines))
         }))
       },
       do.call(
@@ -181,42 +244,4 @@ tab_load_backend = function(tab, app_rvs, output, logger) {
 
 create_tab_name_id = function(name) {
   tolower(gsub(" ", "_", name))
-}
-
-
-#' Title
-#'
-#' @param ... a
-#' @param name a
-#' @param css_files a
-#'
-#' @export
-#'
-subtab = function(..., name, startExpanded = FALSE, css_files) {
-  list(
-    name = name,
-    id = create_tab_name_id(name),
-    startExpanded = startExpanded,
-    subtabs = list(...)
-  )
-}
-
-#' tab
-#'
-#' @param name a
-#' @param R6class a
-#' @param css_files a
-#' @param lazy a
-#'
-#' @export
-#'
-tab = function(name, R6class, selected = NULL, css_files = NULL, lazy = TRUE) {
-  list(
-    name = name,
-    id = create_tab_name_id(name),
-    R6class = R6class,
-    selected = selected,
-    css_files = css_files,
-    lazy = lazy
-  )
 }
